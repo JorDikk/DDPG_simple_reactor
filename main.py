@@ -1,5 +1,4 @@
 from __future__ import division
-import gym
 import numpy as np
 import torch
 from torch.autograd import Variable
@@ -28,6 +27,15 @@ PLOT_CLOSE = False				# True if plot is open
 ram = buffer.MemoryBuffer(MAX_BUFFER)				# initializing buffer
 trainer = train.Trainer(S_DIM, A_DIM, ram)			# initializing neural nets
 # trainer.load_models(300)							# used to load past model
+
+def mkdir(base, name):
+    path = os.path.join(base, name)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
+
+mkdir('.', 'Models')
+mkdir('.', 'plots')
 
 for _ep in range(MAX_EPISODES):
 	# resetting reactor to initial conditions
